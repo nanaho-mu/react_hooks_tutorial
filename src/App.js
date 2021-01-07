@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import './App.css';
 
 //propsを引数で受け取ることでコンポーネント内で使える
@@ -8,10 +8,24 @@ const App=(props)=>{
   const {name,price}=state
   
   
+  useEffect(()=>{
+    console.log('useEFfect is involved')
+  })
+  useEffect(()=>{
+    console.log('this is like componentDidmount')
+  },[])
+  useEffect(()=>{
+    console.log('this call back for name only')
+  },[name])
+  const Period=()=>{
+    console.log('return is involved')
+    return '。'
+  }
+
   return (
    <div>
 
-     <p>現在の{name}は、{price}円です</p>
+     <p>現在の{name}は、{price}円です{Period()}</p>
      <button onClick={()=>setState({...state,price:price+1})}>+1</button>
      <button onClick={()=>setState({...state,price:price-1})}>-1</button>
      <button onClick={()=>setState(props)}>reset</button>
